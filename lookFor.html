@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/lookFor.css" />
+		<script type="text/javascript" src="js/vue.js" ></script>	
+		<title>寻物启事</title>
+	</head>
+	<body>
+		<div id="information">
+			<div class="navigateBar"><img src="img/back.svg" class="backImg" onclick="back()"/>寻 物 启 事</div>
+			<div class="searchContener">
+				<div class="inputContener">
+					<img src="img/search.svg" class="searchImg"/>
+					<input class="searchInput"/>
+				</div>
+				<div class="categoryContener">
+					物品类别：
+					<select id="category" class="select">
+					<!--<datalist id="url_list">-->
+						<option value=" " ></option>
+						<option value="手机" >手机</option>
+						<option value="手表" >手表</option>
+						<option value="项链" >项链</option>
+						<option value="戒指" >戒指</option>
+						<option value="书包" >书包</option>
+						<option value="水杯" >水杯</option>
+						<option value="工艺品" >工艺品</option>
+						<option value="充电宝" >充电宝</option>
+						<option value="宠物" >宠物</option>
+						<option value="银行卡" >银行卡</option>
+						<option value="身份证">身份证</option>
+						<option value="衣物" >衣物</option>
+						<option value="包包" >包包</option>
+						<option value="其他" >其他</option>
+					<!--</datalist>-->
+					</select>
+					<div class="searchButton">搜索</div>
+				</div>
+			</div>
+			
+			<div class="information-row" v-for="item of information">
+				<div class="user-row">
+					<img :src=item.userHeadImg class="userHeadImg"/>
+					{{item.userName}}
+					<div class="tag" v-show="item.type == 0">寻物启事</div>
+					<div class="tag border-green" v-show="item.type == 1">失物招领</div>
+				</div>
+				<span class="time">{{item.time}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					类别：{{item.category}}</span>
+				<br />
+				<div :class="item.type ?'information-title green' : 'information-title red'">
+					{{item.title}}
+				</div>
+				<div class="imgsContener">
+					<div class="imgContener"><img :src="item.picture1" class="img"></div>
+					<div class="imgContener"><img :src="item.picture2" class="img"></div>
+					<div class="imgContener"><img :src="item.picture3" class="img"></div>
+				</div>
+				<div class="information-detail">{{item.detail}}</div>
+			</div>
+			
+		</div>
+		
+		
+		<div class="footer">
+			<div class="publishButton" onclick="toPublish()">
+				发布寻物启事
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript">
+			var information = new Vue({
+				el :"#information",
+				data:{
+					information:[{
+						userHeadImg : "./img/20140630092929_jaGfr.thumb.700_0.jpeg",
+						userName:"平台真好用",
+						type: 0,
+						time:"2019.01.05",
+						category:"钱包",
+						title:"啊！我心爱的钱包丢掉了55555好心人帮我找找吧",
+						picture1:"./img/lost1.png",
+						picture2:"./img/lost2.png",
+						picture3:"./img/lost3.png",
+						detail:"有没有人捡到一个黑色的钱包，里面有身份证学生证银行卡，身份证的名字是XXX，请拾取到的同学联系QQ：XXXXXXXX，钱包大致样式如下图"
+					},{
+						userHeadImg : "./img/20131130235032_tBLEJ.thumb.700_0.jpeg",
+						userName:"人工智能好方便",
+						type: 0,
+						time:"2019.01.01",
+						category:"其他",
+						title:"心疼我的驾驶证",
+						picture1:"./img/lost4.png",
+						picture2:"./img/lost5.png",
+						picture3:"./img/lost6.png",
+						detail:"我驾驶证又弄丢了，心好痛，应该是今天上午在C105考试的时候落在那里了，名字是XXX，请好心人一定要联系我，电话：XXXXXXXX"
+					},{
+						userHeadImg : "./img/20140630092929_jaGfr.thumb.700_0.jpeg",
+						userName:"平台真好用",
+						type: 0,
+						time:"2018.12.06",
+						category:"钱包",
+						title:"我的牛仔裤逃跑掉了啊啊啊啊啊啊",
+						picture1:"./img/lost7.png",
+						picture2:"./img/lost8.png",
+						picture3:"./img/lost9.png",
+						detail:"女三604今天晒了一条牛仔裤在窗户外面的绳子上，应该是风太大了掉了下去，衣架是木头夹子，希望看到的小姐姐联系一下我哦，QQ：XXXXXXXX"
+					},{
+						userHeadImg : "./img/20140923094045_BNYji.thumb.700_0.png",
+						userName:"终于有人工智能了",
+						type: 0,
+						time:"2018.11.30",
+						category:"其他",
+						title:"跪求还iPad！",
+						picture1:"./img/lost10.png",
+						picture2:"./img/lost11.png",
+						picture3:"./img/lost12.png",
+						detail:"我在女9号楼6层丢失一台iPad，麻烦捡到的人能够及时联系我谢谢，它是我的生产工具，我非常需要它。"
+					},
+					
+					]
+				},
+				methods:{
+				},
+				
+			});
+			
+			function back(){
+				window.history.back(-1);
+			}
+			
+			function toPublish(){
+				window.location.href = "publish.html";
+			}
+		</script>
+	</body>
+</html>

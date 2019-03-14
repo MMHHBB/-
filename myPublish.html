@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/myPublish.css" />
+		<title>我的物品</title>
+	</head>
+	<body>
+		<div class="navigateBar"><img src="img/back.svg" class="backImg" onclick="back()"/>我 发 布 的</div>
+		<div class="categoryContener">
+			<div class="selection bgRed" onclick="clickFind()" id="findButton">寻物启事</div>
+			<div class="selection bgGreen" onclick="clickLost()" id="lostButton">失物招领</div>
+		</div>
+		<div class="seletion">
+			<div class="user-row">
+				<img src="img/20131130235032_tBLEJ.thumb.700_0.jpeg" class="userHeadImg"/>
+				ABC
+				</div>
+				<span class="time">2019.01.01 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					类别：书包</span>
+				<br />
+				<div class="information-title colorRed">
+					我的东西丢了
+				</div>
+				<div class="imgsContener">
+					<div class="imgContener"><img src="img/1.jpeg" class="img"></div>
+					<div class="imgContener"><img src="img/20140630092929_jaGfr.thumb.700_0.jpeg" class="img"></div>
+					<div class="imgContener"><img src="img/banner1.jpg" class="img"></div>
+				</div>
+				<div class="information-detail">{{item.detail}}</div>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript">
+			var findButton = document.querySelector("#findButton");
+			var lostButton = document.querySelector("#lostButton");
+			findButton.style.opacity = 1;
+			function clickFind(){
+				findButton.style.opacity = 1;
+				lostButton.style.opacity = 0.4;
+			}
+			function clickLost(){
+				findButton.style.opacity = 0.4
+				lostButton.style.opacity = 1;
+			}
+			
+			
+			
+			
+			function back(){
+				window.history.back(-1);
+			}
+		</script>
+	</body>
+</html>

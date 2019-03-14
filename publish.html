@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/publish.css" />
+		<title>发布</title>
+	</head>
+	<body>
+		<div class="navigateBar">发 布</div>
+		<div class="totalContener">
+			<div class="categoryContener">
+				<div class="selection bgRed" onclick="clickFind()" id="findButton">寻物启事</div>
+				<div class="selection bgGreen" onclick="clickLost()" id="lostButton">失物招领</div>
+			</div>
+			<input class="titleInput" placeholder="请输入您要发布的标题"/>
+			<textarea class="detailInput" placeholder="请为您的物品添加文字描述"></textarea>
+			<div class="inputBar">物品类别：
+				<select class="input" id="category">
+				<!--<datalist id="url_list">-->
+					<option value=" " ></option>
+					<option value="手机" >手机</option>
+					<option value="手表" >手表</option>
+					<option value="项链" >项链</option>
+					<option value="戒指" >戒指</option>
+					<option value="书包" >书包</option>
+					<option value="水杯" >水杯</option>
+					<option value="工艺品" >工艺品</option>
+					<option value="充电宝" >充电宝</option>
+					<option value="宠物" >宠物</option>
+					<option value="银行卡" >银行卡</option>
+					<option value="身份证">身份证</option>
+					<option value="衣物" >衣物</option>
+					<option value="包包" >包包</option>
+					<option value="其他" >其他</option>
+				<!--</datalist>-->
+				</select>
+			</div>
+			<input class="imgButton" type="file" accept="image/*" onchange="selectedImg(this)" id="fileButton">
+			<div class="imgsContener">
+				<div class="imgContener">
+					<img onclick="selectImg()"src="img/shot.svg" class="imgs"/>
+				</div>
+			</div>
+			<div class="publishButton" onclick="publish()">发布</div>
+		</div>
+		
+		<div class="footer">
+			<div class="footerContener">
+				<div class="footerButton" onclick="toHomePage()">
+					<img src="img/homePage.svg" class="footerImg opacity"/>
+					首页
+				</div>
+			</div>
+			<div class="footerContener">
+			<div class="footerButton" onclick="toPublish()">
+					<img src="img/publish.svg" class="footerImg "/>
+					发布
+				</div>
+			</div>
+			<div class="footerContener">
+				<div class="footerButton" onclick="toMy()">
+					<img src="img/user.svg" class="footerImg opacity"/>
+					我的
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			var findButton = document.querySelector("#findButton");
+			var lostButton = document.querySelector("#lostButton");
+			var publishButton = document.querySelector(".publishButton");
+			publishButton.innerHTML = "发布失物招领";
+			findButton.style.opacity = 1;
+			function clickFind(){
+				findButton.style.opacity = 1;
+				lostButton.style.opacity = 0.4;
+				publishButton.innerHTML = "发布失物招领";
+				publishButton.style.background = "linear-gradient(#FF5D59,#D91018)";
+			}
+			function clickLost(){
+				findButton.style.opacity = 0.4;
+				lostButton.style.opacity = 1;
+				publishButton.innerHTML = "发布寻物启事";
+				publishButton.style.background = "linear-gradient(#96E04B,#05B702)";
+			}
+			function selectedImg(obj){
+				var file = obj.files[0];            
+            	var fr = new FileReader();
+            	fr.readAsDataURL(file);
+            	fr.onload = function(){
+            		var imgContener = document.createElement("div");
+            		imgContener.className = "imgContener";
+            		var img = document.createElement("img");
+                	img.src = fr.result;
+                	img.className = "imgs";
+                	img.onclick = function deleteImg(){
+                		var parent = document.querySelector(".imgsContener");
+                		parent.removeChild(this.parentNode);
+                	};
+                	imgContener.appendChild(img);
+               		document.querySelector(".imgsContener").appendChild(imgContener);
+               		
+            	}
+			}
+			function selectImg(){
+				var fileButton = document.querySelector("#fileButton");
+				fileButton.click();
+			}
+			function publish(){
+				alert("发布成功！");
+				window.location.href = "index.html";
+			}
+			
+			function toHomePage(){
+				window.location.href = "index.html";
+			}
+			function toPublish(){
+				window.location.href ="publish.html";
+			}
+			function toMy(){
+				if(window.localStorage.isLogin == 1) window.location.href = "my.html";
+				else window.location.href = "my2.html";
+			}
+		</script>
+	</body>
+</html>

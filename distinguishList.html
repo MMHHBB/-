@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/distinguishList.css" />
+
+		<script type="text/javascript" src="js/vue.js" ></script>	
+		<title>识别结果</title>
+	</head>
+	<body>
+		<div class="root">
+			<div class="navigateBar"><img src="img/back.svg" class="backImg" onclick="back()"/>识 别 结 果</div>
+			<img src="img/img2.jpg" class="bgImg"/>
+			<div class="information-row" v-for="item of information">
+				<div class="user-row">
+					<img :src=item.userHeadImg class="userHeadImg"/>
+					{{item.userName}}
+					<div class="tag" v-show="item.type == 1">已丢失</div>
+				</div>
+				<div class="midContener">
+					<div class="left recognitionText">
+						识别度<br/><span class="recognitionDegree">99%</span></div>
+					<div class="right">
+						<div class="informButton" onclick="inform()">通知TA</div>
+						<div class="contactButton" v-if="item.type">联系TA</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript">
+			var photo = window.localStorage.photoImg;
+			var img = document.querySelector('.bgImg');
+			img.src = photo;
+			var information = new Vue({
+				el :".root",
+				data:{
+					information:[{
+						userHeadImg : "./img/20131130235032_tBLEJ.thumb.700_0.jpeg",
+						userName:"abc",
+						type: 0,
+						time:"2018.01.01",
+						category:"戒指",
+						title:"我的戒指丢了，求好心人看到了告诉我,谢谢",
+						detail:"戒指在路上丢的什么什么的a1111de111..asdajsgdjasgjdas"
+					},{
+						userHeadImg : "./img/20140630092929_jaGfr.thumb.700_0.jpeg",
+						userName:"ABC",
+						type: 1,
+						time:"2018.01.01",
+						category:"戒指",
+						title:"捡到一个戒指，相信它对失主挺重要的，请失主联系我",
+						detail:"今天早上再，在某某某路上捡到的"
+					},{
+						userHeadImg : "./img/20140923094045_BNYji.thumb.700_0.png",
+						userName:"abc",
+						type: 0,
+						time:"2018.01.01",
+						category:"书包",
+						title:"我的书包丢了，里面有很重要的东西，求好心人看到了告诉我，谢谢",
+						detail:"戒指在路上丢的什么什么的a1111de111..asdajsgdjasgjdas"
+					}
+					
+					]
+				},
+				methods:{
+				},
+				
+			});
+			
+			function inform(){
+				alert("我们将会通知该用户您的您拾取到类似TA的物品！感谢您为构建和谐社会贡献一份力量！感谢您的无私！");
+			}
+			function back(){
+				window.history.back(-1);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/AIRemember.css" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<title>AI记物</title>
+	</head>
+	<body>
+		<div class="navigateBar"><img src="img/back.svg" class="backImg" onclick="back()"/>AI 记 物</div>
+		<img src="img/AIRemember.jpg" class="bgImg"/>
+		<div class="title">AI记物</div>
+		<div class="introduce">&nbsp;&nbsp;将您的物品拍摄五秒视频，尽可能多角度拍摄，AI将会记住您的物品，若有人拾取您的物品并使用AI识物功能拍摄照片，AI将会通知您并且将您的联系方式告诉拾取者。</div>
+		<div class="inputBar">物品名称：<input class="input"placeholder="给您的物品起个名字吧" id="name"/></div>
+		<div class="inputBar">物品类别：
+			<select class="input" id="category">
+			<!--<datalist id="url_list">-->
+				<option value=" " ></option>
+				<option value="手机" >手机</option>
+				<option value="手表" >手表</option>
+				<option value="项链" >项链</option>
+				<option value="戒指" >戒指</option>
+				<option value="书包" >书包</option>
+				<option value="水杯" >水杯</option>
+				<option value="工艺品" >工艺品</option>
+				<option value="充电宝" >充电宝</option>
+				<option value="宠物" >宠物</option>
+				<option value="银行卡" >银行卡</option>
+				<option value="身份证">身份证</option>
+				<option value="衣物" >衣物</option>
+				<option value="包包" >包包</option>
+				<option value="其他" >其他</option>
+			<!--</datalist>-->
+			</select>
+		</div>
+		<div class="shotButtonBar">
+			<img src="img/shot.svg" class="shotImg" onclick="shot()"/>
+		</div>
+		<div class="button" onclick="save()">保存物品</div>
+		
+		<script type="text/javascript">
+			var shotImg = document.querySelector(".shotImg");
+			if(window.localStorage.videoImg != "null"){
+				shotImg.src = window.localStorage.videoImg;
+			}
+			
+			function save(){
+				alert("保存成功，正在训练AI记住您的物品，请稍后。");
+				window.history.back(-1);
+			}
+			function shot(){
+				var name = document.querySelector("#name");
+				localStorage.name = name.value;
+				var category = document.querySelector("#category");
+				localStorage.category = category.value;
+				window.location.href="video.html";
+				
+			}
+			function back(){
+				window.history.back(-1);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/vue.js" ></script>	
+		<title>AI失物招领平台</title>
+	</head>
+	<body>
+		<div class="navigateBar">AI 失 物 招 领 平 台</div>
+		<div class="mui-slider">
+		  <div class="mui-slider-group mui-slider-loop">
+		    <!--支持循环，需要重复图片节点-->
+		    <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="img/banner1.jpg" /></a></div>
+		    <div class="mui-slider-item"><a href="#"><img src="img/banner2.jpg" /></a></div>
+		    <div class="mui-slider-item"><a href="#"><img src="img/banner3.jpg" /></a></div>
+		    <div class="mui-slider-item"><a href="#"><img src="img/banner4.png" /></a></div>
+		    <div class="mui-slider-item"><a href="#"><img src="img/banner1.jpg" /></a></div>
+		    <!--支持循环，需要重复图片节点-->
+		    <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="1.jpg" /></a></div>
+		  </div>
+		</div>
+		<div id="information">
+			<div class="buttons">
+				<div class="button-row1">
+					<div class="button1" onclick="toAIRemember()">
+						<img src="img/AIremenber.svg" class="button-img"/>
+						<div class="button-text-div">
+							<span class="button-text-title">AI记物</span><br />
+							<span class="button-text">五秒视频，帮您记物，快捷迅速</span>
+						</div>
+					</div>
+					<div class="button1" onclick="toAIDistinguish()">
+						<img src="img/AIdistinguish.svg" class="button-img"/>
+						<div class="button-text-div">
+							<span class="button-text-title">AI识物</span><br />
+							<span class="button-text">一张照片，找寻失主，不求名禄</span>
+						</div>
+					</div>
+				</div>
+				<div class="button-row1">
+					<div class="button1" onclick="toLostProperty()">
+						<img src="img/shiwuzhaoling.svg" class="button-img"/>
+						<div class="button-text-div">
+							<span class="button-text-title" style="color: #008800;">失物招领</span><br />
+							<span class="button-text">发布信息，物归原主，一生平安</span>
+						</div>
+					</div>
+					<div class="button1" onclick="toLookFor()">
+						<img src="img/xunwuqishi.svg" class="button-img"/>
+						<div class="button-text-div">
+							<span class="button-text-title" style="color: #FF0033;">寻物启事</span><br />
+							<span class="button-text">发布寻物，寻求帮助，八方援助</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="information-row" v-for="item of information">
+				<div class="user-row">
+					<img :src=item.userHeadImg class="userHeadImg"/>
+					{{item.userName}}
+					<div class="tag" v-show="item.type == 0">寻物启事</div>
+					<div class="tag border-green" v-show="item.type == 1">失物招领</div>
+				</div>
+				<span class="time">{{item.time}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					类别：{{item.category}}</span>
+				<br />
+				<div :class="item.type ?'information-title green' : 'information-title red'">
+					{{item.title}}
+				</div>
+				<div class="imgsContener">
+					<div class="imgContener"><img :src="item.picture1" class="img"></div>
+					<div class="imgContener"><img :src="item.picture2" class="img"></div>
+					<div class="imgContener"><img :src="item.picture3" class="img"></div>
+				</div>
+				<div class="information-detail">{{item.detail}}</div>
+			</div>
+			
+		</div>
+		
+		<div class="footer">
+			<div class="footerContener">
+				<div class="footerButton" onclick="toHomePage()">
+					<img src="img/homePage.svg" class="footerImg"/>
+					首页
+				</div>
+			</div>
+			<div class="footerContener">
+			<div class="footerButton" onclick="toPublish()">
+					<img src="img/publish.svg" class="footerImg opacity"/>
+					发布
+				</div>
+			</div>
+			<div class="footerContener">
+				<div class="footerButton" onclick="toMy()"> 
+					<img src="img/user.svg" class="footerImg opacity"/>
+					我的
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<script type="text/javascript">
+			window.localStorage.videoImg = null;
+			window.localStorage.name = null;
+			window.localStorage.category = null;
+			window.localStorage.photoImg = null;
+			var gallery = mui('.mui-slider');
+			gallery.slider({
+			  interval:5000//自动轮播周期，若为0则不自动播放，默认为0；
+			});
+			
+			var information = new Vue({
+				el :"#information",
+				data:{
+					information:[{
+						userHeadImg : "./img/20131130235032_tBLEJ.thumb.700_0.jpeg",
+						userName:"人工智能好方便",
+						type: 1,
+						time:"2019.01.01",
+						category:"身份证",
+						title:"快来看看是不是你的东西掉了！",
+						picture1:"./img/lookFor1.png",
+						picture2:"./img/lookFor2.png",
+						picture3:"./img/lookFor3.png",
+						detail:"你好，我在XX火车站售票厅自助售票机那里捡到一位好像叫XXX (当时急着赶车，没太注意看)的身份证，不知道是不是我们学校的。我当时也是急着赶车没仔细看，好像是苏州的小姐姐，我把身份证给售票厅的人员了，望本人看到知道在火车站丢的，可以找回。"
+					},{
+						userHeadImg : "./img/20140630092929_jaGfr.thumb.700_0.jpeg",
+						userName:"平台真好用",
+						type: 0,
+						time:"2019.01.05",
+						category:"钱包",
+						title:"啊！我心爱的钱包丢掉了55555好心人帮我找找吧",
+						picture1:"./img/lost1.png",
+						picture2:"./img/lost2.png",
+						picture3:"./img/lost3.png",
+						detail:"有没有人捡到一个黑色的钱包，里面有身份证学生证银行卡，身份证的名字是XXX，请拾取到的同学联系QQ：XXXXXXXX，钱包大致样式如下图"
+					},{
+						userHeadImg : "./img/20140923094045_BNYji.thumb.700_0.png",
+						userName:"终于有人工智能了",
+						type: 1,
+						time:"2018.02.09",
+						category:"其他",
+						title:"哪位小姐姐的水卡掉了呀～",
+						picture1:"./img/lookFor4.png",
+						picture2:"./img/lookFor5.png",
+						picture3:"./img/lookFor6.png",
+						detail:"女生宿舍11号楼，哪位小姐姐的水卡落在了四楼打水的地方，记得来425拿一下。"
+					}
+					
+					]
+				},
+				methods:{
+				},
+				
+			});
+			
+			
+			function toAIRemember(){
+				window.location.href='AIRemember.html';
+			}
+			function toAIDistinguish(){
+				window.location.href='AIDistinguish.html';
+			}
+			function toLostProperty(){
+				window.location.href = 'lostProperty.html';
+			}
+			
+			function toHomePage(){
+				window.location.href = "index.html";
+			}
+			function toPublish(){
+				window.location.href ="publish.html";
+			}
+			function toMy(){
+				if(window.localStorage.isLogin == 1) window.location.href = "my.html";
+				else window.location.href = "my2.html";
+					
+			}
+			function toLookFor(){
+				window.location.href = "lookFor.html";
+			}
+		</script>
+		
+	</body>
+	
+</html>

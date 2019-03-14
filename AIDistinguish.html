@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/AIDistinguish.css" />
+
+		<title>AI识物</title>
+	</head>
+	<body>
+		<div class="navigateBar"><img src="img/back.svg" class="backImg" onclick="back()"/>AI 识 物</div>
+		<img src="img/img1.jpg" class="bgImg"/>
+		<div class="title">AI识物</div>
+		<div class="introduce">&nbsp;&nbsp;拍摄一张物品的照片，AI将会识别该物品，若有人使用本AI记物功能记忆该物品，可以将该用户的信息提供给您联系该用户。</div>
+		<div class="inputBar">物品类别：
+			<select class="input" id="category">
+			<!--<datalist id="url_list">-->
+				<option value="空" >请选择类别以便更好的识别物品</option>
+				<option value="手机" >手机</option>
+				<option value="手表" >手表</option>
+				<option value="项链" >项链</option>
+				<option value="戒指" >戒指</option>
+				<option value="书包" >书包</option>
+				<option value="水杯" >水杯</option>
+				<option value="工艺品" >工艺品</option>
+				<option value="充电宝" >充电宝</option>
+				<option value="宠物" >宠物</option>
+				<option value="银行卡" >银行卡</option>
+				<option value="身份证">身份证</option>
+				<option value="衣物" >衣物</option>
+				<option value="包包" >包包</option>
+				<option value="其他" >其他</option>
+			<!--</datalist>-->
+			</select>
+		</div>
+		<div class="shotButtonBar">
+			<img src="img/shot.svg" class="shotImg" onclick="shot()"/>
+		</div>
+		<div class="button" onclick="save()">开始识别物品</div>
+		
+		<script type="text/javascript">
+			var shotImg = document.querySelector(".shotImg");
+			if(window.localStorage.photoImg != "null"){
+				shotImg.src = window.localStorage.photoImg;
+			}
+			
+			function save(){
+				window.location.href ="distinguishList.html";
+			}
+			function shot(){
+				var category = document.querySelector("#category");
+				localStorage.category = category.value;
+				window.location.href="photo.html";
+				
+			}
+			function back(){
+				window.history.back(-1);
+			}
+		</script>
+	</body>
+</html>

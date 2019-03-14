@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/login.css" />
+		<title></title>
+	</head>
+	<body>
+		<img src="img/bg.jpeg" class="bgImg"/>
+		<div class="navigateBar"><img src="img/back.svg" class="backImg" onclick="back()"/>登 录</div>
+		<img src="img/1.jpeg" class="headImg"/>
+		
+		<input class="input" placeholder="请输入账号"/>
+		<input class="input passwordInput" placeholder="请输入密码"/>
+		<div class="row">
+			<div class="register">立即注册</div> 
+			<div class="forget">忘记密码?</div>
+		</div>
+		<div class="loginButton" onclick="toMy()">登录</div>
+		
+		<script type="text/javascript">
+			function back(){
+				window.history.back(-1);
+			}
+			function toMy(){
+				window.localStorage.isLogin = 1;
+				window.location.href ="my.html";
+			}
+		</script>
+	</body>
+</html>
